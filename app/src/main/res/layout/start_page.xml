@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/logo2">
+
+    </ImageView>
+
+
+    <ImageView
+        android:layout_width="50pt"
+        android:layout_height="25pt"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/logo1"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textColor="#7F7F7F"
+        android:layout_above="@+id/hidden_text"
+        android:text = "by. ESC" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:textColor="#FFFFFF"
+        android:layout_centerInParent="true"
+        android:id="@+id/hidden_text"
+        android:text = "볼케이노 맛없쩡 인아쟝 멍청이 재원이형 멋있어용 지웅이 기웅이" />
+
+</RelativeLayout>
