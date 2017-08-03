@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">사람사이 꿈의학교</string>
+    <string name="loading">로딩 중</string>
+    <string name="description">설명</string>
+    <string name="title">제목</string>
+</resources>
