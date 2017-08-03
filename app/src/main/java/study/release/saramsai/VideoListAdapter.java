@@ -1,9 +1,19 @@
 package study.release.saramsai;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -14,15 +24,17 @@ import java.util.ArrayList;
 public class VideoListAdapter extends RecyclerView.Adapter<VideoListViewHolder> {
 
     private ArrayList<VideoInfoType> videoInfo;
+    private Context context;
 
-    public VideoListAdapter() {
+    public VideoListAdapter(Context context) {
         InitializeVideoInfoArrayList();
+        this.context = context;
     }
 
     @Override
     public VideoListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.viewiholder, parent, false);
+                .inflate(R.layout.viewholder, parent, false);
         return new VideoListViewHolder(v);
     }
 
@@ -47,6 +59,53 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListViewHolder> 
         videoInfo.add(new VideoInfoType("꿈의학교1차시 개교식", "hmt6mu3GhBM"));
         videoInfo.add(new VideoInfoType("꿈의학교4차 남자팀연극", "Swu5rT5HIs0"));
 
+        JsonObjectRequest videoInfoRequest =
+                new JsonObjectRequest(StaticFinalStringVars.getVideoLinkUrl(), GenerateRequestKey(), GenerateVideoInfoRequestListener(),GenerateVideoInfoRequestErrorListener());
+
+
+        //Enable When Server Part is finished
+        //MySingleton.getInstance(context).addToRequestQueue(videoInfoRequest);
+
+    }
+
+    private Response.Listener<JSONObject> GenerateVideoInfoRequestListener() {
+        Response.Listener<JSONObject> jsonObjectListener = new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                JSONArray videoInfoJsonArray = null;
+                JSONObject videoInfoJsonObject = null;
+                try {
+                    videoInfoJsonArray = response.getJSONArray(StaticFinalStringVars.getVideoInfo());
+                    for(int i = 0;i < videoInfoJsonArray.length();i++) {
+                        videoInfoJsonObject = videoInfoJsonArray.getJSONObject(i);
+                        videoInfo.add(new VideoInfoType(videoInfoJsonObject.getString(StaticFinalStringVars.getVideoTitle()), videoInfoJsonObject.getString(StaticFinalStringVars.getVideoLink())));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        return jsonObjectListener;
+    }
+
+    private Response.ErrorListener GenerateVideoInfoRequestErrorListener() {
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "리스트를 받아오지 못했어요...", Toast.LENGTH_SHORT).show();
+            }
+        };
+        return errorListener;
+    }
+
+    private JSONObject GenerateRequestKey() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put(StaticFinalStringVars.getAppKeyTag(), AppNetworkKey.getAppKey());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
 
     public void refreshVideoList() {

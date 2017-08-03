@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void SetupVideoList() {
         videoList.setLayoutManager(new LinearLayoutManager(GetContext()));
-        videoListAdapter = new VideoListAdapter();
+        videoListAdapter = new VideoListAdapter(GetContext());
         videoList.setAdapter(videoListAdapter);
     }
 

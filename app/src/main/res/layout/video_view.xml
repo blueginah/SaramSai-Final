@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@+id/LL1"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@drawable/title"
-        android:id = "@+id/LL1">
+        android:background="@drawable/title">
 
         <ImageView
-            android:id="@+id/btn_exit"
+            android:id="@+id/videoViewBtnExit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
-            android:onClick="return_to_list"
-            android:src="@mipmap/exit"/>
+            android:src="@mipmap/exit" />
 
     </RelativeLayout>
 
@@ -26,17 +26,31 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/LL1"
         android:layout_marginTop="15dp"
-        android:text="Title"
+        android:text="@string/title"
         android:textSize="25sp"
         android:textStyle="bold" />
 
     <com.google.android.youtube.player.YouTubePlayerView
-        android:id="@+id/youtube_view"
+        android:id="@+id/videoViewYoutube"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/videoViewTitle"
         android:layout_marginTop="15dp" />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/videoViewYoutube"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="15dp">
 
+        <TextView
+            android:id="@+id/videoViewDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="@string/description"/>
+
+    </ScrollView>
 
 </RelativeLayout>

@@ -1,8 +1,10 @@
 package study.release.saramsai;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
@@ -14,24 +16,30 @@ import com.google.android.youtube.player.YouTubePlayerView;
 public class VideoViewActivity extends YouTubeFailureRecoveryActivity implements YouTubePlayer.OnInitializedListener, YouTubePlayer.OnFullscreenListener {
 
     private String link;
-
-    boolean fullscreen;
-
-    YouTubePlayerView youTubeView;
-    YouTubePlayer youTubePlayer;
+    private boolean fullscreen;
+    private YouTubePlayerView videoViewYoutube;
+    private YouTubePlayer youTubePlayer;
+    private TextView videoViewTitle;
+    private TextView videoViewDescription;
+    private ImageView videoViewBtnExit;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.video_view);
 
-        Intent temp = getIntent();
+        /*
+         * This part is for test.
+         * Please change this part of code when parsing all information
+         */
+        InitializeLink();
+        /*
+         * Test Part Ends Here.
+         */
 
-        link = temp.getStringExtra(StaticFinalStringVars.getVideoLink());
-
-        youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
-        youTubeView.initialize(DeveloperKey.DEVELOPER_KEY, this);
-
+        ConnectXMLwithJAVA();
+        InitializeYouTubeView();
+        SetupVideoViewExitButton();
     }
 
     @Override
@@ -42,7 +50,7 @@ public class VideoViewActivity extends YouTubeFailureRecoveryActivity implements
 
     @Override
     protected YouTubePlayer.Provider getYouTubePlayerProvider() {
-        return (YouTubePlayerView) findViewById(R.id.youtube_view);
+        return (YouTubePlayerView) findViewById(R.id.videoViewYoutube);
     }
 
     @Override
@@ -56,12 +64,35 @@ public class VideoViewActivity extends YouTubeFailureRecoveryActivity implements
 
     @Override
     public void onBackPressed() {
-        if(fullscreen) {
+        if (fullscreen) {
             youTubePlayer.setFullscreen(false);
             fullscreen = !fullscreen;
             youTubePlayer.pause();
             youTubePlayer.play();
-        }
-        else super.onBackPressed();
+        } else super.onBackPressed();
+    }
+
+    private void ConnectXMLwithJAVA() {
+        videoViewYoutube = (YouTubePlayerView) findViewById(R.id.videoViewYoutube);
+        videoViewTitle = (TextView) findViewById(R.id.videoViewTitle);
+        videoViewDescription = (TextView) findViewById(R.id.videoViewDescription);
+        videoViewBtnExit = (ImageView) findViewById(R.id.videoViewBtnExit);
+    }
+
+    private void SetupVideoViewExitButton() {
+        videoViewBtnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+    }
+
+    private void InitializeYouTubeView() {
+        videoViewYoutube.initialize(DeveloperKey.DEVELOPER_KEY, this);
+    }
+
+    private void InitializeLink() {
+        link = getIntent().getStringExtra(StaticFinalStringVars.getVideoLink());
     }
 }
