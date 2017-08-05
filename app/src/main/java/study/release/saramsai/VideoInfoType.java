@@ -8,10 +8,12 @@ public class VideoInfoType {
 
     private String title;
     private String link;
+    private String description;
 
-    public VideoInfoType(String title, String link) {
+    public VideoInfoType(String title, String link, String description) {
         this.title = title;
         this.link = link;
+        this.description = description;
     }
 
     public String getTitle() {
@@ -28,5 +30,13 @@ public class VideoInfoType {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

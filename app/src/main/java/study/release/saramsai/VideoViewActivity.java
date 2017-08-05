@@ -22,6 +22,8 @@ public class VideoViewActivity extends YouTubeFailureRecoveryActivity implements
     private TextView videoViewTitle;
     private TextView videoViewDescription;
     private ImageView videoViewBtnExit;
+    private String title;
+    private String description;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,7 +34,7 @@ public class VideoViewActivity extends YouTubeFailureRecoveryActivity implements
          * This part is for test.
          * Please change this part of code when parsing all information
          */
-        InitializeLink();
+        InitializeContents();
         /*
          * Test Part Ends Here.
          */
@@ -40,6 +42,7 @@ public class VideoViewActivity extends YouTubeFailureRecoveryActivity implements
         ConnectXMLwithJAVA();
         InitializeYouTubeView();
         SetupVideoViewExitButton();
+        TextSetup();
     }
 
     @Override
@@ -92,7 +95,14 @@ public class VideoViewActivity extends YouTubeFailureRecoveryActivity implements
         videoViewYoutube.initialize(DeveloperKey.DEVELOPER_KEY, this);
     }
 
-    private void InitializeLink() {
+    private void InitializeContents() {
+        title = getIntent().getStringExtra(StaticFinalStringVars.getVideoTitle());
         link = getIntent().getStringExtra(StaticFinalStringVars.getVideoLink());
+        description = getIntent().getStringExtra(StaticFinalStringVars.getVideoDescription());
+    }
+
+    private void TextSetup() {
+        videoViewTitle.setText(title);
+        videoViewDescription.setText(description);
     }
 }
