@@ -41,7 +41,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListViewHolder> 
 
     @Override
     public void onBindViewHolder(VideoListViewHolder holder, int position) {
-        holder.setThumb(videoInfo.get(position).getTitle(), videoInfo.get(position).getLink());
+        holder.setThumb(videoInfo.get(position).getTitle(), videoInfo.get(position).getLink(), videoInfo.get(position).getDescription());
     }
 
     @Override
@@ -55,6 +55,10 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListViewHolder> 
     }
 
     private void GetList() {
+
+        videoInfo.add(new VideoInfoType("쉬는 시간", "ArwPNahI0sQ", "..."));
+        videoInfo.add(new VideoInfoType("꿈의학교1차시 개교식", "hmt6mu3GhBM", "..."));
+        videoInfo.add(new VideoInfoType("꿈의학교4차 남자팀연극", "Swu5rT5HIs0", "..."));
 
         JsonObjectRequest videoInfoRequest =
                 new JsonObjectRequest(StaticFinalStringVars.getVideoLinkUrl(), GenerateRequestKey(), GenerateVideoInfoRequestListener(),GenerateVideoInfoRequestErrorListener());
@@ -77,8 +81,8 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListViewHolder> 
                     Log.d("jsonarray", videoInfoJsonArray.toString());
                     for(int i = 0;i < videoInfoJsonArray.length();i++) {
                         videoInfoJsonObject = videoInfoJsonArray.getJSONObject(i);
-                        videoInfo.add(new VideoInfoType(videoInfoJsonObject.getString(StaticFinalStringVars.getVideoTitle()), videoInfoJsonObject.getString(StaticFinalStringVars.getVideoLink())));
                         Log.d("jsonobject", videoInfoJsonObject.toString());
+                        videoInfo.add(new VideoInfoType(videoInfoJsonObject.getString(StaticFinalStringVars.getVideoTitle()), videoInfoJsonObject.getString(StaticFinalStringVars.getVideoLink()), videoInfoJsonObject.getString(StaticFinalStringVars.getVideoDescription())));
                     }
                     notifyDataSetChanged();
                 } catch (JSONException e) {

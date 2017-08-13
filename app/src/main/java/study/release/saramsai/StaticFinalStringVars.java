@@ -7,10 +7,11 @@ package study.release.saramsai;
 public class StaticFinalStringVars {
 
     private static final String VIDEO_LINK = "video_link";
-    private static final String APP_KEY_TAG = "app_key";
+    private static final String APP_KEY_TAG = "__APPKEY__";
     private static final String VIDEO_LINK_URL = "http://54.202.215.97/saramsai/PHP/video_list_app.php";
     private static final String VIDEO_INFO = "video_info";
     private static final String VIDEO_TITLE = "video_title";
+    private static final String VIDEO_DESCRIPTION = "video_description";
 
 
     public static String getVideoLink() {
@@ -31,5 +32,9 @@ public class StaticFinalStringVars {
 
     public static String getVideoTitle() {
         return VIDEO_TITLE;
+    }
+
+    public static String getVideoDescription() {
+        return VIDEO_DESCRIPTION;
     }
 }

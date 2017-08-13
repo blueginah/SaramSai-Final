@@ -21,6 +21,7 @@ public class VideoListViewHolder extends RecyclerView.ViewHolder implements YouT
     TextView video_info;
     private String title;
     private String link;
+    private String description;
 
     public VideoListViewHolder(View itemView) {
         super(itemView);
@@ -30,10 +31,12 @@ public class VideoListViewHolder extends RecyclerView.ViewHolder implements YouT
         video_info = (TextView) itemView.findViewById(R.id.video_info);
     }
 
-    public void setThumb(String title, String link) {
+    public void setThumb(String title, String link, String description) {
 
         video_info.setText(title);
         this.link = link;
+        this.title = title;
+        this.description = description;
         SetupThumbnail();
 
     }
@@ -61,7 +64,9 @@ public class VideoListViewHolder extends RecyclerView.ViewHolder implements YouT
 
     private void GoToVideoViewActivity() {
         Intent intent = new Intent(GetContext(), VideoViewActivity.class);
+        intent.putExtra(StaticFinalStringVars.getVideoTitle(), title);
         intent.putExtra(StaticFinalStringVars.getVideoLink(), link);
+        intent.putExtra(StaticFinalStringVars.getVideoDescription(), description);
         GetContext().startActivity(intent);
     }
 
