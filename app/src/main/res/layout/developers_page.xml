@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/developerBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/title">
+
+        <ImageView
+            android:id="@+id/developerBtnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:src="@mipmap/exit" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/developerBar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="만든 사람들:"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:padding="15dp"/>
+
+            <include layout="@layout/developer_bk" />
+
+            <include layout="@layout/developer_jiyoung" />
+
+            <include layout="@layout/developer_jaewon" />
+
+            <include layout="@layout/developer_hl" />
+
+            <include layout="@layout/developer_inna" />
+
+            <include layout="@layout/developer_jw" />
+
+            <include layout="@layout/developer_sbg" />
+
+            <include layout="@layout/developer_yup" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
